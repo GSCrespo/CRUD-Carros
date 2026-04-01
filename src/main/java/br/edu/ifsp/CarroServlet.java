@@ -4,14 +4,15 @@ import br.edu.ifsp.model.Carro;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet
-public class CarroServlet {
+@WebServlet("/carroServlet")
+public class CarroServlet extends HttpServlet {
     
     private static List<Carro> listaCarros = new ArrayList<>();
 
@@ -33,6 +34,7 @@ public class CarroServlet {
         String transmissao = request.getParameter("transmissao");
         double valor = Double.parseDouble(request.getParameter("valor"));
         double avaliacao = Double.parseDouble(request.getParameter("avaliacao"));
+        String url = null;
 
         List<String> listaValidacao = new ArrayList<>();
 
@@ -67,6 +69,23 @@ public class CarroServlet {
         if(avaliacao < 0){
             listaValidacao.add("Avaliação não pode ser negativa");
         }
+
+        //caso tenha erro, volta para o form
+        if (!listaValidacao.isEmpty()) {
+            request.setAttribute("erros", listaValidacao);
+            request.getRequestDispatcher("cadastro.jsp").forward(request, response);
+            return;
+        }else {
+
+            Carro carro = new Carro(marca, modelo, ano, descricao, cor,
+                    combustivel, quilometragem, transmissao, valor, avaliacao);
+
+            listaCarros.add(carro);
+            request.setAttribute("listaCarros", listaCarros);
+            request.getRequestDispatcher("listaCarros.jsp").forward(request, response);
+        }
+
+
 
 
     }
