@@ -11,14 +11,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet("/carroServlet")
+@WebServlet("/carro")
 public class CarroServlet extends HttpServlet {
     
     private static List<Carro> listaCarros = new ArrayList<>();
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-
+        //String idParam = request.getParameter("id");
+        //String action = request.getParameter("action");
 
     }
 
@@ -74,7 +75,6 @@ public class CarroServlet extends HttpServlet {
         if (!listaValidacao.isEmpty()) {
             request.setAttribute("erros", listaValidacao);
             request.getRequestDispatcher("cadastro.jsp").forward(request, response);
-            return;
         }else {
 
             Carro carro = new Carro(marca, modelo, ano, descricao, cor,

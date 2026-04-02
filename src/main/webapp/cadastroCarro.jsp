@@ -12,7 +12,7 @@
             </div>
 
             <div class="card-body">
-                <form action="carroServlet" method="post">
+                <form action="carro" method="post">
 
                     <div class="mb-3">
                         <label class="form-label">Marca</label>

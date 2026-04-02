@@ -1,7 +1,9 @@
 package br.edu.ifsp.model;
 
 public class Carro {
+    private static int id_atual = 1;
 
+    private int id;
     private String marca;
     private String modelo;
     private int ano;
@@ -16,14 +18,14 @@ public class Carro {
     //construtor vazio
 
     public Carro() {
-
+        this.id = id_atual++;
     }
 
     //construtor completo
     public Carro(String marca, String modelo, int ano, String descricao, String cor,
                  String combustivel, double quilometragem, String transmissao,
                  double valor, double avaliacao) {
-
+        this();
         this.marca = marca;
         this.modelo = modelo;
         this.ano = ano;
@@ -37,6 +39,11 @@ public class Carro {
     }
 
     //getters
+
+
+    public int getId() {
+        return id;
+    }
 
     public String getMarca() {
         return marca;
@@ -79,6 +86,11 @@ public class Carro {
     }
 
     //setters
+
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public void setMarca(String marca) {
         this.marca = marca;

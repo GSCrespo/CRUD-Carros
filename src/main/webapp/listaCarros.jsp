@@ -22,13 +22,15 @@
             <th>Transmissão</th>
             <th>Valor</th>
             <th>Avaliação</th>
+            <th>Editar</th>
+            <th>Excluir</th>
         </tr>
         </thead>
 
         <tbody>
-        <c:forEach var="carro" items="${listaCarros}" varStatus="status">
+        <c:forEach var="carro" items="${listaCarros}">
             <tr>
-                <td>${status.index}</td>
+                <td>${carro.id}</td>
                 <td>${carro.marca}</td>
                 <td>${carro.modelo}</td>
                 <td>${carro.ano}</td>
@@ -38,6 +40,8 @@
                 <td>${carro.transmissao}</td>
                 <td>R$ ${carro.valor}</td>
                 <td>${carro.avaliacao}</td>
+                <td><a class="btn btn-warning"href="carro?action=editar&id=${carro.getId()}">Editar</a></td>
+                <td><a class="btn btn-danger"href="carro?action=excluir&id=${carro.getId()}">Excluir</a></td>
             </tr>
         </c:forEach>
         </tbody>
