@@ -14,12 +14,32 @@ import java.util.List;
 @WebServlet("/carro")
 public class CarroServlet extends HttpServlet {
     
-    private static List<Carro> listaCarros = new ArrayList<>();
+    private static final List<Carro> listaCarros = new ArrayList<>();
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-        //String idParam = request.getParameter("id");
-        //String action = request.getParameter("action");
+        String action = request.getParameter("action");
+
+        System.out.println("entrou no doGet");
+
+        if(action == null){
+
+            response.sendRedirect("listaCarros.jsp");
+            return;
+        }
+
+        switch (action){
+
+            case "editar":
+                carregarParaEditar(request,response);
+                System.out.println("entrou aqui");
+                break;
+            case "excluir":
+                excluirCarro(request,response);
+                break;
+            default:
+                response.sendRedirect("listaCarros.jsp");
+        }
 
     }
 
@@ -35,7 +55,6 @@ public class CarroServlet extends HttpServlet {
         String transmissao = request.getParameter("transmissao");
         double valor = Double.parseDouble(request.getParameter("valor"));
         double avaliacao = Double.parseDouble(request.getParameter("avaliacao"));
-        String url = null;
 
         List<String> listaValidacao = new ArrayList<>();
 
@@ -89,4 +108,37 @@ public class CarroServlet extends HttpServlet {
 
 
     }
+
+    private Carro buscarPorId(int id){
+        for(Carro c : listaCarros){
+            if(c.getId() == id){
+                System.out.println(c.getId());
+                return c;
+            }
+        }
+        return null;
+    }
+
+    private void carregarParaEditar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        int idParam = Integer.parseInt(request.getParameter("id"));
+
+        Carro carro = buscarPorId(idParam);
+
+        request.setAttribute("carro",carro);
+        request.setAttribute("modo", "editar");
+        request.getRequestDispatcher("cadastroCarro.jsp").forward(request,response);
+
+    }
+
+    private void excluirCarro(HttpServletRequest request, HttpServletResponse response) throws  IOException{
+        int idParam = Integer.parseInt(request.getParameter("id"));
+
+        Carro c = buscarPorId(idParam);
+
+        if(c != null){
+            listaCarros.remove(c);
+        }
+        response.sendRedirect("carro");
+    }
+
 }

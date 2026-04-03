@@ -16,27 +16,27 @@
 
                     <div class="mb-3">
                         <label class="form-label">Marca</label>
-                        <input type="text" id="marca" name="marca" class="form-control" required>
+                        <input type="text" id="marca" name="marca" value="${carro.marca}" class="form-control" required>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Modelo</label>
-                        <input type="text" id="modelo" name="modelo" class="form-control" required>
+                        <input type="text" id="modelo" name="modelo"  value="${carro.modelo}" class="form-control" required>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Ano</label>
-                        <input type="number" id="ano" name="ano" class="form-control" required>
+                        <input type="number" id="ano" name="ano" value="${carro.ano}" class="form-control" required>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Descrição</label>
-                        <textarea name="descricao" id="descricao" class="form-control" required></textarea>
+                        <textarea name="descricao" id="descricao" class="form-control" required>${tarefa.descricao}</textarea>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Cor</label>
-                        <input type="text" id="cor" name="cor" class="form-control" required>
+                        <input type="text" id="cor" name="cor" value="${carro.cor}" class="form-control" required>
                     </div>
 
                     <div class="mb-3">
@@ -51,7 +51,7 @@
 
                     <div class="mb-3">
                         <label class="form-label">Quilometragem</label>
-                        <input type="number" name="quilometragem" id="quilometragem" class="form-control" required>
+                        <input type="number" name="quilometragem" id="quilometragem" value="${carro.quilometragem}" class="form-control" required>
                     </div>
 
                     <div class="mb-3">
@@ -64,12 +64,12 @@
 
                     <div class="mb-3">
                         <label class="form-label">Valor (R$)</label>
-                        <input type="number" step="0.01" name="valor" id="valor" class="form-control" required>
+                        <input type="number" step="0.01" name="valor" id="valor" value="${carro.valor}" class="form-control" required>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Avaliação</label>
-                        <input type="number" min="0" max="5" name="avaliacao" id="avaliacao" class="form-control" required>
+                        <input type="number" min="0" max="5" name="avaliacao" id="avaliacao" value="${carro.avaliacao}" class="form-control" required>
                     </div>
 
                     <button type="submit" class="btn btn-success w-100">
