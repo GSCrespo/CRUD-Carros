@@ -8,7 +8,14 @@
 
         <div class="card bg-secondary">
             <div class="card-header text-center">
-                <h3>Cadastro de Carros</h3>
+                <c:choose>
+                    <c:when test="${not empty carro.id}">
+                        <h1>Editando Carro</h1>
+                    </c:when>
+                    <c:otherwise>
+                        <h1>Cadastrar Carro</h1>
+                    </c:otherwise>
+                </c:choose>
             </div>
 
             <div class="card-body">
@@ -44,10 +51,10 @@
                     <div class="mb-3">
                         <label class="form-label">Combustível</label>
                         <select name="combustivel" id="combustivel" class="form-select">
-                            <option>Gasolina</option>
-                            <option>Álcool</option>
-                            <option>Diesel</option>
-                            <option>Elétrico</option>
+                           <option ${carro.combustivel == 'Gasolina' ? 'selected' : ''}>Gasolina</option>
+                           <option ${carro.combustivel == 'Álcool' ? 'selected' : ''}>Álcool</option>
+                           <option ${carro.combustivel == 'Diesel' ? 'selected' : ''}>Diesel</option>
+                           <option ${carro.combustivel == 'Elétrico' ? 'selected' : ''}>Elétrico</option>
                         </select>
                     </div>
 
@@ -59,8 +66,8 @@
                     <div class="mb-3">
                         <label class="form-label">Transmissão</label>
                         <select name="transmissao" id="transmissao" class="form-select">
-                            <option>Manual</option>
-                            <option>Automática</option>
+                            <option ${carro.transmissao == 'Manual' ? 'selected' : ''}>Manual</option>
+                            <option ${carro.transmissao == 'Automática' ? 'selected' : ''}>Automática</option>
                         </select>
                     </div>
 

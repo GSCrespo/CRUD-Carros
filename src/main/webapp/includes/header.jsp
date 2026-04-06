@@ -24,7 +24,15 @@
                     <li class="nav-item">
                       <a class="nav-link" href="#">Login</a>
                     </li>
-                  </ul>
+                    </ul>
+                <div class="d-flex gap-2">
+                    <a class="btn btn-success" href="${pageContext.request.contextPath}/cadastroCarro.jsp">
+                             Cadastrar Carro
+                    </a>
+                    <a class="btn btn-warning" href="${pageContext.request.contextPath}/carro">
+                         Listar Carros
+                    </a>
+                </div>
                 </div>
               </div>
             </nav>
