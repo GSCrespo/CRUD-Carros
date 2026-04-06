@@ -23,11 +23,8 @@ public class CarroServlet extends HttpServlet {
         System.out.println("entrou no doGet");
 
         if(action == null){
-
-            response.sendRedirect("listaCarros.jsp");
-            return;
+            action = "listar";
         }
-
         switch (action){
 
             case "editar":
@@ -37,8 +34,10 @@ public class CarroServlet extends HttpServlet {
             case "excluir":
                 excluirCarro(request,response);
                 break;
+            case "listar":
             default:
-                response.sendRedirect("listaCarros.jsp");
+                request.setAttribute("listaCarros", listaCarros);
+                request.getRequestDispatcher("listaCarros.jsp").forward(request, response);
         }
 
     }
@@ -95,13 +94,40 @@ public class CarroServlet extends HttpServlet {
             request.setAttribute("erros", listaValidacao);
             request.getRequestDispatcher("cadastro.jsp").forward(request, response);
         }else {
+            String idParam = request.getParameter("id");
+            if(idParam != null && !idParam.isEmpty()){
+                int id = Integer.parseInt(idParam);
 
-            Carro carro = new Carro(marca, modelo, ano, descricao, cor,
-                    combustivel, quilometragem, transmissao, valor, avaliacao);
+                Carro carroExistente = buscarPorId(id);
 
-            listaCarros.add(carro);
-            request.setAttribute("listaCarros", listaCarros);
-            request.getRequestDispatcher("listaCarros.jsp").forward(request, response);
+                if(carroExistente == null){
+                    response.sendRedirect("carro");
+                    return;
+                }
+
+                carroExistente.setMarca(marca);
+                carroExistente.setModelo(modelo);
+                carroExistente.setAno(ano);
+                carroExistente.setDescricao(descricao);
+                carroExistente.setCor(cor);
+                carroExistente.setCombustivel(combustivel);
+                carroExistente.setQuilometragem(quilometragem);
+                carroExistente.setTransmissao(transmissao);
+                carroExistente.setValor(valor);
+                carroExistente.setAvaliacao(avaliacao);
+
+                request.setAttribute("listaCarros", listaCarros);
+                request.getRequestDispatcher("listaCarros.jsp").forward(request, response);
+
+            }else {
+                Carro carro = new Carro(marca, modelo, ano, descricao, cor,
+                        combustivel, quilometragem, transmissao, valor, avaliacao);
+
+                listaCarros.add(carro);
+                //request.setAttribute("listaCarros", listaCarros);
+                //request.getRequestDispatcher("listaCarros.jsp").forward(request, response);
+            }
+            response.sendRedirect("carro");
         }
 
 
@@ -112,6 +138,7 @@ public class CarroServlet extends HttpServlet {
     private Carro buscarPorId(int id){
         for(Carro c : listaCarros){
             if(c.getId() == id){
+                System.out.println("---- id do carro buscado");
                 System.out.println(c.getId());
                 return c;
             }
@@ -134,10 +161,16 @@ public class CarroServlet extends HttpServlet {
         int idParam = Integer.parseInt(request.getParameter("id"));
 
         Carro c = buscarPorId(idParam);
-
+        System.out.println("excluir carro");
+        System.out.println(c);
         if(c != null){
             listaCarros.remove(c);
         }
+
+        for(Carro carro : listaCarros){
+            System.out.println(carro.getId());
+        }
+
         response.sendRedirect("carro");
     }
 

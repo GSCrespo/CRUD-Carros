@@ -14,6 +14,8 @@
             <div class="card-body">
                 <form action="carro" method="post">
 
+                    <input type="hidden" name="id" value="${carro.id}">
+
                     <div class="mb-3">
                         <label class="form-label">Marca</label>
                         <input type="text" id="marca" name="marca" value="${carro.marca}" class="form-control" required>
