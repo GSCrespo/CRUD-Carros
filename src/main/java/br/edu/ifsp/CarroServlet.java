@@ -77,10 +77,10 @@ public class CarroServlet extends HttpServlet {
             listaValidacao.add("Preencha o tipo de combustível");
         }
         if(quilometragem < 0){
-            listaValidacao.add("Quilometragem não pode ser nula");
+            listaValidacao.add("Quilometragem não pode ser negativa");
         }
         if(transmissao.isEmpty()){
-            listaValidacao.add("Preencha o tipo de transmissão (manual ou automática");
+            listaValidacao.add("Preencha o tipo de transmissão (manual ou automática)");
         }
         if(valor < 0){
             listaValidacao.add("Valor não pode ser negativo");
@@ -92,7 +92,8 @@ public class CarroServlet extends HttpServlet {
         //caso tenha erro, volta para o form
         if (!listaValidacao.isEmpty()) {
             request.setAttribute("erros", listaValidacao);
-            request.getRequestDispatcher("cadastro.jsp").forward(request, response);
+            request.getRequestDispatcher("cadastroCarro.jsp").forward(request, response);
+            return;
         }else {
             String idParam = request.getParameter("id");
             if(idParam != null && !idParam.isEmpty()){
@@ -116,8 +117,6 @@ public class CarroServlet extends HttpServlet {
                 carroExistente.setValor(valor);
                 carroExistente.setAvaliacao(avaliacao);
 
-                request.setAttribute("listaCarros", listaCarros);
-                request.getRequestDispatcher("listaCarros.jsp").forward(request, response);
 
             }else {
                 Carro carro = new Carro(marca, modelo, ano, descricao, cor,
@@ -128,6 +127,7 @@ public class CarroServlet extends HttpServlet {
                 //request.getRequestDispatcher("listaCarros.jsp").forward(request, response);
             }
             response.sendRedirect("carro");
+            return;
         }
 
 

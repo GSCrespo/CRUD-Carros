@@ -35,12 +35,12 @@
 
                     <div class="mb-3">
                         <label class="form-label">Ano</label>
-                        <input type="number" id="ano" name="ano" value="${carro.ano}" class="form-control" required>
+                        <input type="number" id="ano" name="ano" min="0" value="${carro.ano}" class="form-control" required>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Descrição</label>
-                        <textarea name="descricao" id="descricao" class="form-control" required>${tarefa.descricao}</textarea>
+                        <textarea name="descricao" id="descricao" class="form-control" required>${carro.descricao}</textarea>
                     </div>
 
                     <div class="mb-3">
@@ -60,7 +60,7 @@
 
                     <div class="mb-3">
                         <label class="form-label">Quilometragem</label>
-                        <input type="number" name="quilometragem" id="quilometragem" value="${carro.quilometragem}" class="form-control" required>
+                        <input type="number" name="quilometragem" id="quilometragem" min="0" value="${carro.quilometragem}" class="form-control" >
                     </div>
 
                     <div class="mb-3">
@@ -73,7 +73,7 @@
 
                     <div class="mb-3">
                         <label class="form-label">Valor (R$)</label>
-                        <input type="number" step="0.01" name="valor" id="valor" value="${carro.valor}" class="form-control" required>
+                        <input type="number" step="0.01" name="valor" id="valor" min="" value="${carro.valor}" class="form-control" required>
                     </div>
 
                     <div class="mb-3">

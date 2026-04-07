@@ -30,6 +30,7 @@
                          <th>Transmissão</th>
                          <th>Valor</th>
                          <th>Avaliação</th>
+                         <th>Descrição</th>
                          <th>Editar</th>
                          <th>Excluir</th>
                      </tr>
@@ -48,6 +49,7 @@
                              <td>${carro.transmissao}</td>
                              <td>R$ ${carro.valor}</td>
                              <td>${carro.avaliacao}</td>
+                             <td>${carro.descricao}</td>
                              <td><a class="btn btn-warning"href="carro?action=editar&id=${carro.getId()}">Editar</a></td>
                              <td><a class="btn btn-danger"href="carro?action=excluir&id=${carro.getId()}">Excluir</a></td>
                          </tr>
