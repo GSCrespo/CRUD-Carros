@@ -1,12 +1,14 @@
 package br.edu.ifsp;
 
 import br.edu.ifsp.model.Carro;
+import br.edu.ifsp.model.Usuario;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +20,8 @@ public class CarroServlet extends HttpServlet {
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+
+
         String action = request.getParameter("action");
 
         System.out.println("entrou no doGet");
@@ -28,12 +32,27 @@ public class CarroServlet extends HttpServlet {
         switch (action){
 
             case "editar":
+
+
+                if (!isAdmin(request)) {
+                    response.sendRedirect("index.jsp");
+                    return;
+                }
+
                 carregarParaEditar(request,response);
-                System.out.println("entrou aqui");
                 break;
+
             case "excluir":
+
+
+                if (!isAdmin(request)) {
+                    response.sendRedirect("index.jsp");
+                    return;
+                }
+
                 excluirCarro(request,response);
                 break;
+
             case "listar":
             default:
                 request.setAttribute("listaCarros", listaCarros);
@@ -43,6 +62,14 @@ public class CarroServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+
+        HttpSession session = request.getSession();
+        Usuario logado = (Usuario) session.getAttribute("usuarioLogado");
+
+        if (logado == null || !"ADMIN".equals(logado.getTipo())) {
+            response.sendRedirect("index.jsp"); // volta pra home, não pro login
+            return;
+        }
 
         String marca = request.getParameter("marca");
         String modelo = request.getParameter("modelo");
@@ -160,6 +187,7 @@ public class CarroServlet extends HttpServlet {
     private void excluirCarro(HttpServletRequest request, HttpServletResponse response) throws  IOException{
         int idParam = Integer.parseInt(request.getParameter("id"));
 
+
         Carro c = buscarPorId(idParam);
         System.out.println("excluir carro");
         System.out.println(c);
@@ -173,5 +201,11 @@ public class CarroServlet extends HttpServlet {
 
         response.sendRedirect("carro");
     }
+        private boolean isAdmin(HttpServletRequest request) {
+            HttpSession session = request.getSession();
+            Usuario logado = (Usuario) session.getAttribute("usuarioLogado");
+
+            return (logado != null && "ADMIN".equals(logado.getTipo()));
+        }
 
 }

@@ -73,7 +73,7 @@
 
                     <div class="mb-3">
                         <label class="form-label">Valor (R$)</label>
-                        <input type="number" step="0.01" name="valor" id="valor" min="" value="${carro.valor}" class="form-control" required>
+                        <input type="number" step="0.01" name="valor" id="valor" min="0" value="${carro.valor}" class="form-control" required>
                     </div>
 
                     <div class="mb-3">

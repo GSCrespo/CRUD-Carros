@@ -22,17 +22,31 @@
                       <a class="nav-link" href="#sobre">Sobre</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="#">Login</a>
+                        <c:choose>
+                            <c:when test="${usuarioLogado == null}">
+                                <a class="nav-link" href="login.jsp">Login</a>
+                            </c:when>
+                            <c:otherwise>
+                                <a class="nav-link" href="Sair">Sair (${usuarioLogado.userName})</a>
+                            </c:otherwise>
+                        </c:choose>
                     </li>
                     </ul>
-                <div class="d-flex gap-2">
-                    <a class="btn btn-success" href="${pageContext.request.contextPath}/cadastroCarro.jsp">
-                             Cadastrar Carro
-                    </a>
-                    <a class="btn btn-warning" href="${pageContext.request.contextPath}/carro">
-                         Listar Carros
-                    </a>
-                </div>
+                    <div class="d-flex gap-2">
+
+                        <!-- Apenas ADMIN pode ver -->
+                        <c:if test="${usuarioLogado != null && usuarioLogado.tipo == 'ADMIN'}">
+                            <a class="btn btn-success" href="${pageContext.request.contextPath}/cadastroCarro.jsp">
+                                Cadastrar Carro
+                            </a>
+                        </c:if>
+
+                        <!-- Qualquer um pode ver -->
+                        <a class="btn btn-warning" href="${pageContext.request.contextPath}/carro">
+                            Listar Carros
+                        </a>
+
+                    </div>
                 </div>
               </div>
             </nav>

@@ -31,8 +31,10 @@
                          <th>Valor</th>
                          <th>Avaliação</th>
                          <th>Descrição</th>
+                         <c:if test="${usuarioLogado != null && usuarioLogado.tipo == 'ADMIN'}">
                          <th>Editar</th>
                          <th>Excluir</th>
+                         </c:if>
                      </tr>
                      </thead>
 
@@ -50,8 +52,10 @@
                              <td>R$ ${carro.valor}</td>
                              <td>${carro.avaliacao}</td>
                              <td>${carro.descricao}</td>
+                             <c:if test="${usuarioLogado != null && usuarioLogado.tipo == 'ADMIN'}">
                              <td><a class="btn btn-warning"href="carro?action=editar&id=${carro.getId()}">Editar</a></td>
                              <td><a class="btn btn-danger"href="carro?action=excluir&id=${carro.getId()}">Excluir</a></td>
+                             </c:if>
                          </tr>
                      </c:forEach>
                      </tbody>
