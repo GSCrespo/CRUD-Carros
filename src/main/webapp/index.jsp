@@ -36,11 +36,11 @@
 
         <!-- Botões -->
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselCarros" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon"></span>
+            <span class="carousel-control-prev-icon bg-dark rounded"></span>
         </button>
 
         <button class="carousel-control-next" type="button" data-bs-target="#carouselCarros" data-bs-slide="next">
-            <span class="carousel-control-next-icon"></span>
+            <span class="carousel-control-next-icon bg-dark rounded"></span>
         </button>
 
     </div>
