@@ -11,13 +11,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @WebServlet("/carro")
 public class CarroServlet extends HttpServlet {
     
     private static final List<Carro> listaCarros = new ArrayList<>();
-
+    List<Carro> listaLancamento = new ArrayList<>();
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 
@@ -54,9 +56,25 @@ public class CarroServlet extends HttpServlet {
                 break;
 
             case "listar":
+                request.setAttribute("listaCarros", listaCarros);
+                request.getRequestDispatcher("listaCarros.jsp").forward(request, response);
+                break;
+            case "home":
+                if(!listaCarros.isEmpty()) {
+                    listaLancamento = listaCarros.stream()
+                            .sorted(Comparator.comparing(Carro::getValor).reversed())
+                            .limit(5)
+                            .collect(Collectors.toList());
+                    System.out.println("entrou aq");
+                    System.out.println(listaLancamento.size());
+                }
+                request.setAttribute("lancamentos",listaLancamento);
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+                break;
             default:
                 request.setAttribute("listaCarros", listaCarros);
                 request.getRequestDispatcher("listaCarros.jsp").forward(request, response);
+                break;
         }
 
     }

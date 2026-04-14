@@ -19,7 +19,7 @@
             </div>
 
             <div class="card-body">
-                <form action="carro" method="post">
+                <form action="${pageContext.request.contextPath}/carro" method="post">
 
                     <input type="hidden" name="id" value="${carro.id}">
 
