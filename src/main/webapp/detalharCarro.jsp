@@ -5,15 +5,62 @@
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-<div class="container flex-grow-1">
-    <h2>${carro.marca} ${carro.modelo}</h2>
+<div class="container flex-grow-1 mt-4">
 
-    <p>Ano: ${carro.ano}</p>
-    <p>Cor: ${carro.cor}</p>
-    <p>Combustível: ${carro.combustivel}</p>
-    <p>Valor: R$ ${carro.valor}</p>
-    <p>${carro.descricao}</p>
+    <div class="card shadow-lg">
+        <div class="row g-0">
+
+            <div class="col-md-7">
+                <div class="card-body">
+
+                    <h2 class="card-title mb-3">
+                        ${carro.marca} ${carro.modelo}
+                    </h2>
+
+                    <h4 class="text-success mb-4">
+                        R$ ${carro.valor}
+                    </h4>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <p><strong>Ano:</strong> ${carro.ano}</p>
+                            <p><strong>Cor:</strong> ${carro.cor}</p>
+                        </div>
+
+                        <div class="col-md-6">
+                            <p><strong>Combustível:</strong> ${carro.combustivel}</p>
+                            <p><strong>Km:</strong> ${carro.quilometragem}</p>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <p class="card-text">
+                        ${carro.descricao}
+                    </p>
+
+                    <div class="mt-4 d-flex gap-2">
+
+                        <a href="${pageContext.request.contextPath}/carro?action=home"
+                           class="btn btn-secondary">
+                            Voltar
+                        </a>
+
+                        <c:if test="${usuarioLogado != null && usuarioLogado.tipo == 'ADMIN'}">
+                            <a href="${pageContext.request.contextPath}/carro?action=editar&id=${carro.id}"
+                               class="btn btn-warning">
+                                Editar
+                            </a>
+                        </c:if>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
 </div>
-
 
 <c:import url="/includes/footer.jsp" />
