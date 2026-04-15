@@ -27,7 +27,7 @@ public class Login extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setAttribute("usuarioLogado", u);
 
-                response.sendRedirect("index.jsp");
+                response.sendRedirect(request.getContextPath() + "/carro?action=home");
                 return;
             }
         }

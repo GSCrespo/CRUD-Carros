@@ -25,6 +25,10 @@
                                     Combustível: ${carro.combustivel} <br>
                                     Valor: R$ ${carro.valor}
                                 </p>
+                                <a href="${pageContext.request.contextPath}/carro?action=detalhes&id=${carro.id}"
+                                       class="btn btn-primary">
+                                        Ver mais
+                                    </a>
                             </div>
                         </div>
                     </div>
@@ -34,7 +38,6 @@
 
         </div>
 
-        <!-- Botões -->
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselCarros" data-bs-slide="prev">
             <span class="carousel-control-prev-icon bg-dark rounded"></span>
         </button>
@@ -79,11 +82,12 @@
                              Ver mais
                          </a>
 
-                         <!-- opcional / verificar o lance de adm -->
-                         <a href="${pageContext.request.contextPath}/carro?action=editar&id=${carro.id}"
-                            class="btn btn-warning btn-sm">
-                             Editar
-                         </a>
+                         <c:if test="${usuarioLogado != null && usuarioLogado.tipo == 'ADMIN'}">
+                             <a href="${pageContext.request.contextPath}/carro?action=editar&id=${carro.id}"
+                                class="btn btn-warning btn-sm">
+                                 Editar
+                             </a>
+                         </c:if>
 
                      </div>
 

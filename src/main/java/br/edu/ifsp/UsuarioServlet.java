@@ -26,7 +26,7 @@ public class UsuarioServlet extends HttpServlet {
         HttpSession session = request.getSession();
         Usuario logado = (Usuario) session.getAttribute("usuarioLogado");
 
-        if (logado != null && !"ADMIN".equals(logado.getTipo())) {
+        if (logado == null || !"ADMIN".equals(logado.getTipo())) {
             response.sendRedirect("index.jsp"); // volta pra home, não pro login
             return;
         }

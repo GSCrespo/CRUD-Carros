@@ -28,7 +28,7 @@
                                 <a class="nav-link" href="login.jsp">Login</a>
                             </c:when>
                             <c:otherwise>
-                                <a class="nav-link" href="Sair">Sair ${usuarioLogado.tipo}(${usuarioLogado.userName})</a>
+                                <a class="nav-link" href="${pageContext.request.contextPath}/Sair">Sair ${usuarioLogado.tipo}(${usuarioLogado.userName})</a>
                             </c:otherwise>
                         </c:choose>
                     </li>

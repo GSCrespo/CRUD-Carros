@@ -16,6 +16,6 @@ public class SairServlet extends HttpServlet {
             session.invalidate(); // ACABA A SESSÃO
         }
 
-        response.sendRedirect("index.jsp"); // volta pra home
+        response.sendRedirect(request.getContextPath() + "/carro?action=home"); // volta pra home
     }
 }
