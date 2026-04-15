@@ -68,8 +68,17 @@ public class CarroServlet extends HttpServlet {
                     System.out.println("entrou aq");
                     System.out.println(listaLancamento.size());
                 }
+                request.setAttribute("listaCarros", listaCarros);
                 request.setAttribute("lancamentos",listaLancamento);
                 request.getRequestDispatcher("index.jsp").forward(request, response);
+                break;
+            case "detalhes":
+                int id = Integer.parseInt(request.getParameter("id"));
+                Carro carro = listaCarros.stream().filter(
+                        c -> c.getId() == id
+                ).findFirst().orElse(null);
+                request.setAttribute("carro",carro);
+                request.getRequestDispatcher("detalharCarro.jsp").forward(request,response);
                 break;
             default:
                 request.setAttribute("listaCarros", listaCarros);
@@ -138,7 +147,6 @@ public class CarroServlet extends HttpServlet {
         if (!listaValidacao.isEmpty()) {
             request.setAttribute("erros", listaValidacao);
             request.getRequestDispatcher("cadastroCarro.jsp").forward(request, response);
-            return;
         }else {
             String idParam = request.getParameter("id");
             if(idParam != null && !idParam.isEmpty()){
@@ -172,7 +180,6 @@ public class CarroServlet extends HttpServlet {
                 //request.getRequestDispatcher("listaCarros.jsp").forward(request, response);
             }
             response.sendRedirect("carro");
-            return;
         }
 
 
