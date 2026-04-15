@@ -1,9 +1,9 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:import url="/includes/header.jsp" />
 
-<div class="container mt-4">
+<div class="container flex-grow-1">
 
     <h2 class="mb-3">Lançamentos</h2>
 

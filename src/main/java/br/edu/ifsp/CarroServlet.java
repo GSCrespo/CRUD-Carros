@@ -23,7 +23,8 @@ public class CarroServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 
-
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         String action = request.getParameter("action");
 
         System.out.println("entrou no doGet");
@@ -92,6 +93,8 @@ public class CarroServlet extends HttpServlet {
 
         HttpSession session = request.getSession();
         Usuario logado = (Usuario) session.getAttribute("usuarioLogado");
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
 
         if (logado == null || !"ADMIN".equals(logado.getTipo())) {
             response.sendRedirect("index.jsp"); // volta pra home, não pro login
