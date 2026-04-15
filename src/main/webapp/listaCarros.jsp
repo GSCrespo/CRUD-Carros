@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:import url="/includes/header.jsp" />
 
@@ -30,6 +31,11 @@
                          <th>Transmissão</th>
                          <th>Valor</th>
                          <th>Avaliação</th>
+
+                         <c:if test="${usuarioLogado != null}">
+                         <th>Avaliar</th>
+                         </c:if>
+
                          <th>Descrição</th>
                          <c:if test="${usuarioLogado != null && usuarioLogado.tipo == 'ADMIN'}">
                          <th>Editar</th>
@@ -47,12 +53,19 @@
                              <td>${carro.ano}</td>
                              <td>${carro.cor}</td>
                              <td>${carro.combustivel}</td>
-                             <td>${carro.quilometragem}</td>
+                             <td><fmt:formatNumber value="${carro.quilometragem}" type="number"/></td>
                              <td>${carro.transmissao}</td>
-                             <td>R$ ${carro.valor}</td>
-                             <td>${carro.avaliacao}</td>
+                             <td><fmt:formatNumber value="${carro.valor}" type="currency"/> </td>
+                             <td><fmt:formatNumber value="${carro.mediaAvaliacao}" maxFractionDigits="1"/></td>
+
+                             <c:if test="${usuarioLogado != null}">
+                             <td><a class="btn btn-secondary" href="avaliacao.jsp?id=${carro.id}">
+                                 Avaliar
+                             </a></td>
+                            </c:if> <!--Somente quem tem cadastro pode avaliar-->
+
                              <td>${carro.descricao}</td>
-                             <c:if test="${usuarioLogado != null && usuarioLogado.tipo == 'ADMIN'}">
+                             <c:if test="${usuarioLogado != null && usuarioLogado.tipo == 'ADMIN'}"> <!--Somente ADMIN pode Editar e Excluir-->
                              <td><a class="btn btn-warning"href="carro?action=editar&id=${carro.getId()}">Editar</a></td>
                              <td><a class="btn btn-danger"href="carro?action=excluir&id=${carro.getId()}">Excluir</a></td>
                              </c:if>

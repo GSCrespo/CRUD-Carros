@@ -13,7 +13,8 @@
     <label>Senha:</label><br>
     <input type="password" name="senha"><br><br>
 
-    <button type="submit">Entrar</button>
+    <button type="submit" class="btn btn-success">Entrar</button>
+    <a href="cadastroUsuario.jsp" class="btn btn-primary" >Cadastre-se</a>
 </form>
     <c:if test="${not empty erro}">
         <p style="color:red;">${erro}</p>

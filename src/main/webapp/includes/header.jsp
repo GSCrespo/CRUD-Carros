@@ -27,7 +27,7 @@
                                 <a class="nav-link" href="login.jsp">Login</a>
                             </c:when>
                             <c:otherwise>
-                                <a class="nav-link" href="Sair">Sair (${usuarioLogado.userName})</a>
+                                <a class="nav-link" href="Sair">Sair ${usuarioLogado.tipo}(${usuarioLogado.userName})</a>
                             </c:otherwise>
                         </c:choose>
                     </li>
@@ -38,6 +38,10 @@
                         <c:if test="${usuarioLogado != null && usuarioLogado.tipo == 'ADMIN'}">
                             <a class="btn btn-success" href="${pageContext.request.contextPath}/cadastroCarro.jsp">
                                 Cadastrar Carro
+                            </a>
+
+                            <a class="btn btn-primary" href="${pageContext.request.contextPath}/cadastroUsuario.jsp">
+                                Cadastrar Usuário
                             </a>
                         </c:if>
 
