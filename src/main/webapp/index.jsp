@@ -48,4 +48,53 @@
 </div>
 
 
+<br>
+
+<div class="container mt-5">
+
+     <h2 class="mb-4">Todos os carros</h2>
+
+     <div class="row">
+
+         <c:forEach var="carro" items="${listaCarros}">
+             <div class="col-md-4 mb-4">
+
+                 <div class="card h-100 shadow-sm">
+
+                     <div class="card-body">
+                         <h5 class="card-title">
+                             ${carro.marca} ${carro.modelo}
+                         </h5>
+
+                         <p class="card-text">
+                             <strong>Ano:</strong> ${carro.ano} <br>
+                             <strong>Cor:</strong> ${carro.cor} <br>
+                             <strong>Valor:</strong> R$ ${carro.valor}
+                         </p>
+                     </div>
+
+                     <div class="card-footer d-flex justify-content-between">
+                         <a href="${pageContext.request.contextPath}/carro?action=detalhes&id=${carro.id}"
+                            class="btn btn-primary btn-sm">
+                             Ver mais
+                         </a>
+
+                         <!-- opcional / verificar o lance de adm -->
+                         <a href="${pageContext.request.contextPath}/carro?action=editar&id=${carro.id}"
+                            class="btn btn-warning btn-sm">
+                             Editar
+                         </a>
+
+                     </div>
+
+                 </div>
+
+             </div>
+         </c:forEach>
+
+     </div>
+
+ </div>
+
+
 <c:import url="/includes/footer.jsp" />
