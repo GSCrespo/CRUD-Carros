@@ -13,7 +13,8 @@ public class Carro {
     private double quilometragem;
     private String transmissao;
     private double valor;
-    private double avaliacao;
+    private int totalAvaliacao;
+    private double somaAvaliacao;
 
     //construtor vazio
 
@@ -24,7 +25,7 @@ public class Carro {
     //construtor completo
     public Carro(String marca, String modelo, int ano, String descricao, String cor,
                  String combustivel, double quilometragem, String transmissao,
-                 double valor, double avaliacao) {
+                 double valor) {
         this();
         this.marca = marca;
         this.modelo = modelo;
@@ -35,7 +36,11 @@ public class Carro {
         this.quilometragem = quilometragem;
         this.transmissao = transmissao;
         this.valor = valor;
-        this.avaliacao = avaliacao;
+    }
+
+    public double getMediaAvaliacao() {
+        if (totalAvaliacao == 0) return 0;
+        return somaAvaliacao / totalAvaliacao;
     }
 
     //getters
@@ -81,8 +86,12 @@ public class Carro {
         return valor;
     }
 
-    public double getAvaliacao() {
-        return avaliacao;
+    public int getTotalAvaliacao() {
+        return totalAvaliacao;
+    }
+
+    public double getSomaAvaliacao() {
+        return somaAvaliacao;
     }
 
     //setters
@@ -123,8 +132,12 @@ public class Carro {
         this.valor = valor;
     }
 
-    public void setAvaliacao(double avaliacao) {
-        this.avaliacao = avaliacao;
+    public void setTotalAvaliacao(int totalAvaliacao) {
+        this.totalAvaliacao = totalAvaliacao;
+    }
+
+    public void setSomaAvaliacao(double somaAvaliacao) {
+        this.somaAvaliacao = somaAvaliacao;
     }
 }
 

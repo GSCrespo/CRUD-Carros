@@ -26,7 +26,7 @@ public class UsuarioServlet extends HttpServlet {
         HttpSession session = request.getSession();
         Usuario logado = (Usuario) session.getAttribute("usuarioLogado");
 
-        if (logado == null || !"ADMIN".equals(logado.getTipo())) {
+        if (logado != null && !"ADMIN".equals(logado.getTipo())) {
             response.sendRedirect("index.jsp"); // volta pra home, não pro login
             return;
         }
@@ -44,15 +44,20 @@ public class UsuarioServlet extends HttpServlet {
         HttpSession session = request.getSession();
         Usuario logado = (Usuario) session.getAttribute("usuarioLogado");
 
-        if (logado == null || !"ADMIN".equals(logado.getTipo())) {
-            response.sendRedirect("index.jsp"); // volta pra home, não pro login
+        if (logado != null && !"ADMIN".equals(logado.getTipo())) {
+            response.sendRedirect("index.jsp"); // volta pra home
             return;
         }
 
         String userName = request.getParameter("username");
         String senha = request.getParameter("senha");
-        String tipo = request.getParameter("tipo"); // ADMIN ou USER
+        String tipo;
 
+        if(logado == null){
+            tipo = "COMUM"; //USER
+        }else {
+            tipo = request.getParameter("tipo"); // ADMIN
+        }
         List<String> erros = new ArrayList<>();
 
         //  VALIDAÇÕES
@@ -85,8 +90,16 @@ public class UsuarioServlet extends HttpServlet {
 
         //  Criar usuário
         Usuario novoUsuario = new Usuario(userName, senha, tipo);
+
         listaUsuarios.add(novoUsuario);
 
-        response.sendRedirect("usuario");
+        if(logado != null && !"COMUM".equals(logado.getTipo())) { /*caso seja admin que cadastrou um usuario ele volta para o index,
+                                                                 caso seja o proprio usuario a se cadastrar ele vai para p login direto */
+            response.sendRedirect("index.jsp");
+        } else{
+            response.sendRedirect("login.jsp");
+        }
     }
+
+
 }

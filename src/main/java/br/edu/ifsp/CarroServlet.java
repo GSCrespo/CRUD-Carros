@@ -97,7 +97,7 @@ public class CarroServlet extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
 
         if (logado == null || !"ADMIN".equals(logado.getTipo())) {
-            response.sendRedirect("index.jsp"); // volta pra home, não pro login
+            response.sendRedirect("index.jsp"); // volta pra home
             return;
         }
 
@@ -110,7 +110,6 @@ public class CarroServlet extends HttpServlet {
         double quilometragem = Double.parseDouble(request.getParameter("quilometragem"));
         String transmissao = request.getParameter("transmissao");
         double valor = Double.parseDouble(request.getParameter("valor"));
-        double avaliacao = Double.parseDouble(request.getParameter("avaliacao"));
 
         List<String> listaValidacao = new ArrayList<>();
 
@@ -142,9 +141,6 @@ public class CarroServlet extends HttpServlet {
         if(valor < 0){
             listaValidacao.add("Valor não pode ser negativo");
         }
-        if(avaliacao < 0){
-            listaValidacao.add("Avaliação não pode ser negativa");
-        }
 
         //caso tenha erro, volta para o form
         if (!listaValidacao.isEmpty()) {
@@ -171,12 +167,10 @@ public class CarroServlet extends HttpServlet {
                 carroExistente.setQuilometragem(quilometragem);
                 carroExistente.setTransmissao(transmissao);
                 carroExistente.setValor(valor);
-                carroExistente.setAvaliacao(avaliacao);
-
 
             }else {
                 Carro carro = new Carro(marca, modelo, ano, descricao, cor,
-                        combustivel, quilometragem, transmissao, valor, avaliacao);
+                        combustivel, quilometragem, transmissao, valor);
 
                 listaCarros.add(carro);
                 //request.setAttribute("listaCarros", listaCarros);
@@ -235,5 +229,14 @@ public class CarroServlet extends HttpServlet {
 
             return (logado != null && "ADMIN".equals(logado.getTipo()));
         }
+
+    public static Carro buscarPorIdStatic(int id){
+        for(Carro c : listaCarros){
+            if(c.getId() == id){
+                return c;
+            }
+        }
+        return null;
+    }
 
 }
