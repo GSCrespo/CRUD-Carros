@@ -27,10 +27,8 @@ public class UsuarioServlet extends HttpServlet {
         Usuario logado = (Usuario) session.getAttribute("usuarioLogado");
 
         if (logado == null || !"ADMIN".equals(logado.getTipo())) {
-            response.sendRedirect("index.jsp"); // volta pra home, não pro login
-            return;
+            throw new RuntimeException("Acesso negado! Você não tem permissão para acessar isso :/");
         }
-
 
         request.setAttribute("usuarios", listaUsuarios);
         request.getRequestDispatcher("listaUsuarios.jsp").forward(request, response);
@@ -45,8 +43,7 @@ public class UsuarioServlet extends HttpServlet {
         Usuario logado = (Usuario) session.getAttribute("usuarioLogado");
 
         if (logado != null && !"ADMIN".equals(logado.getTipo())) {
-            response.sendRedirect("index.jsp"); // volta pra home
-            return;
+            throw new RuntimeException("Acesso negado! Você não tem permissão para acessar isso :/");
         }
 
         String userName = request.getParameter("username");

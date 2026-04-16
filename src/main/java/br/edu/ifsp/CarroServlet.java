@@ -36,10 +36,8 @@ public class CarroServlet extends HttpServlet {
 
             case "editar":
 
-
                 if (!isAdmin(request)) {
-                    response.sendRedirect("index.jsp");
-                    return;
+                    throw new RuntimeException("Acesso negado! Você não tem permissão para acessar isso :/");
                 }
 
                 carregarParaEditar(request,response);
@@ -47,19 +45,21 @@ public class CarroServlet extends HttpServlet {
 
             case "excluir":
 
-
                 if (!isAdmin(request)) {
-                    response.sendRedirect("index.jsp");
-                    return;
+                    throw new RuntimeException("Acesso negado! Você não tem permissão para acessar isso :/");
                 }
 
                 excluirCarro(request,response);
                 break;
 
             case "listar":
+                if (!isAdmin(request)) {
+                    throw new RuntimeException("Acesso negado! Você não tem permissão para acessar isso :/");
+                }
                 request.setAttribute("listaCarros", listaCarros);
                 request.getRequestDispatcher("listaCarros.jsp").forward(request, response);
                 break;
+
             case "home":
                 if(!listaCarros.isEmpty()) {
                     listaLancamento = listaCarros.stream()
@@ -73,7 +73,9 @@ public class CarroServlet extends HttpServlet {
                 request.setAttribute("lancamentos",listaLancamento);
                 request.getRequestDispatcher("index.jsp").forward(request, response);
                 break;
+
             case "detalhes":
+
                 int id = Integer.parseInt(request.getParameter("id"));
                 Carro carro = listaCarros.stream().filter(
                         c -> c.getId() == id
@@ -81,10 +83,12 @@ public class CarroServlet extends HttpServlet {
                 request.setAttribute("carro",carro);
                 request.getRequestDispatcher("detalharCarro.jsp").forward(request,response);
                 break;
+
             default:
                 request.setAttribute("listaCarros", listaCarros);
                 request.getRequestDispatcher("listaCarros.jsp").forward(request, response);
                 break;
+                // verificar fluxo do default dps, ajustar
         }
 
     }
@@ -96,9 +100,8 @@ public class CarroServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
 
-        if (logado == null || !"ADMIN".equals(logado.getTipo())) {
-            response.sendRedirect("index.jsp"); // volta pra home
-            return;
+        if (!isAdmin(request)) {
+            throw new RuntimeException("Acesso negado! Você não tem permissão para acessar isso :/");
         }
 
         String marca = request.getParameter("marca");
