@@ -5,6 +5,7 @@ import br.edu.ifsp.model.Carro;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
+import javax.servlet.jsp.PageContext;
 import java.io.IOException;
 
 @WebServlet("/avaliacao")
@@ -27,6 +28,6 @@ public class AvaliacaoServlet extends HttpServlet {
             }
         }
 
-        response.sendRedirect(request.getContextPath() + "/carro");
+        response.sendRedirect(request.getContextPath() + "/carro?action=detalhes&id=" + id);
     }
 }

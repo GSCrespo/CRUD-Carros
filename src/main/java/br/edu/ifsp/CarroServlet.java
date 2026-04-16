@@ -4,11 +4,10 @@ import br.edu.ifsp.model.Carro;
 import br.edu.ifsp.model.Usuario;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -16,6 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @WebServlet("/carro")
+@MultipartConfig
 public class CarroServlet extends HttpServlet {
     
     private static final List<Carro> listaCarros = new ArrayList<>();
@@ -111,6 +111,16 @@ public class CarroServlet extends HttpServlet {
         String transmissao = request.getParameter("transmissao");
         double valor = Double.parseDouble(request.getParameter("valor"));
 
+        Part imagem = request.getPart("imagem");
+        String nomeArquivo = imagem.getSubmittedFileName();
+        String nomeFinal = System.currentTimeMillis() + "_"+nomeArquivo;
+        String caminho = getServletContext().getRealPath("/uploads");
+        File pasta = new File(caminho);
+        if(!pasta.exists()){
+            pasta.mkdir();
+        }
+        imagem.write(caminho + File.separator + nomeFinal);
+
         List<String> listaValidacao = new ArrayList<>();
 
         // validações
@@ -170,7 +180,7 @@ public class CarroServlet extends HttpServlet {
 
             }else {
                 Carro carro = new Carro(marca, modelo, ano, descricao, cor,
-                        combustivel, quilometragem, transmissao, valor);
+                        combustivel, quilometragem, transmissao, valor, nomeFinal );
 
                 listaCarros.add(carro);
                 //request.setAttribute("listaCarros", listaCarros);

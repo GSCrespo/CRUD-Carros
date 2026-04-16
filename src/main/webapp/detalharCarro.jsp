@@ -25,6 +25,7 @@
                         <div class="col-md-6">
                             <p><strong>Ano:</strong> ${carro.ano}</p>
                             <p><strong>Cor:</strong> ${carro.cor}</p>
+                            <p><strong>Avaliação:</strong> ${carro.mediaAvaliacao}</p>
                         </div>
 
                         <div class="col-md-6">
@@ -53,9 +54,19 @@
                             </a>
                         </c:if>
 
+                        <c:if test="${usuarioLogado != null}">
+                        <a class="btn btn-secondary" href="avaliacao.jsp?id=${carro.id}">avaliar</a>
+                        </c:if>
+
                     </div>
 
                 </div>
+            </div>
+
+            <div class="col-md-5 d-flex align-items-center justify-content-center">
+                <img src="${pageContext.request.contextPath}/uploads/${carro.imagem}"
+                     class="img-fluid rounded w-100"
+                     style="max-height: 200px; max-width: 300px">
             </div>
 
         </div>

@@ -14,7 +14,10 @@
                 <div class="carousel-item ${status.index == 0 ? 'active' : ''}">
 
                     <div class="d-flex justify-content-center">
-                        <div class="card" style="width: 30rem;">
+                        <div class="card" style="width: 20rem;">
+
+                            <img src="${pageContext.request.contextPath}/uploads/${carro.imagem}" width="150 "  class="card-img-top" alt="10">
+
                             <div class="card-body">
                                 <h5 class="card-title">
                                     ${carro.marca} ${carro.modelo}
@@ -23,7 +26,8 @@
                                     Ano: ${carro.ano} <br>
                                     Cor: ${carro.cor} <br>
                                     Combustível: ${carro.combustivel} <br>
-                                    Valor: R$ ${carro.valor}
+                                    Valor: R$ ${carro.valor}<br>
+                                    Avaliação: ${carro.mediaAvaliacao}
                                 </p>
                                 <a href="${pageContext.request.contextPath}/carro?action=detalhes&id=${carro.id}"
                                        class="btn btn-primary">
@@ -62,8 +66,8 @@
          <c:forEach var="carro" items="${listaCarros}">
              <div class="col-md-4 mb-4">
 
-                 <div class="card h-100 shadow-sm">
-
+                 <div class="card h-100 shadow-sm" style="width: 15rem;">
+                 <img src="${pageContext.request.contextPath}/uploads/${carro.imagem}" width="150 "  class="card-img-top" alt="10">
                      <div class="card-body">
                          <h5 class="card-title">
                              ${carro.marca} ${carro.modelo}
@@ -72,7 +76,8 @@
                          <p class="card-text">
                              <strong>Ano:</strong> ${carro.ano} <br>
                              <strong>Cor:</strong> ${carro.cor} <br>
-                             <strong>Valor:</strong> R$ ${carro.valor}
+                             <strong>Valor:</strong> R$ ${carro.valor}<br>
+                             <strong>Avaliação:</strong> ${carro.mediaAvaliacao}
                          </p>
                      </div>
 

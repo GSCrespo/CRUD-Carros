@@ -23,7 +23,7 @@
 
         <div class="card-body">
 
-            <form action="${pageContext.request.contextPath}/carro" method="post">
+            <form action="${pageContext.request.contextPath}/carro" method="post" enctype="multipart/form-data" >
 
                 <input type="hidden" name="id" value="${carro.id}">
 
@@ -80,6 +80,11 @@
                     <div class="col-md-12 mb-3">
                         <label class="form-label">Descrição</label>
                         <textarea name="descricao" class="form-control" rows="3">${carro.descricao}</textarea>
+                    </div>
+
+                    <div class="col-md-16 mb-4">
+                        <label class="fomr-label">Imagem</label>
+                        <input type="file" name="imagem" >
                     </div>
 
                 </div>

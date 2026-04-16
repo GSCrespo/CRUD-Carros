@@ -15,6 +15,7 @@ public class Carro {
     private double valor;
     private int totalAvaliacao;
     private double somaAvaliacao;
+    private String imagem;
 
     //construtor vazio
 
@@ -25,7 +26,7 @@ public class Carro {
     //construtor completo
     public Carro(String marca, String modelo, int ano, String descricao, String cor,
                  String combustivel, double quilometragem, String transmissao,
-                 double valor) {
+                 double valor, String imagem) {
         this();
         this.marca = marca;
         this.modelo = modelo;
@@ -36,6 +37,7 @@ public class Carro {
         this.quilometragem = quilometragem;
         this.transmissao = transmissao;
         this.valor = valor;
+        this.imagem = imagem;
     }
 
     public double getMediaAvaliacao() {
@@ -94,6 +96,10 @@ public class Carro {
         return somaAvaliacao;
     }
 
+    public String getImagem() {
+        return imagem;
+    }
+
     //setters
 
     public void setMarca(String marca) {
@@ -138,6 +144,10 @@ public class Carro {
 
     public void setSomaAvaliacao(double somaAvaliacao) {
         this.somaAvaliacao = somaAvaliacao;
+    }
+
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
     }
 }
 
