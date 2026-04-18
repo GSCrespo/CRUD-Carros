@@ -1,5 +1,6 @@
 package br.edu.ifsp;
 
+import br.edu.ifsp.exception.AcessoNegadoException;
 import br.edu.ifsp.model.Carro;
 import br.edu.ifsp.model.Usuario;
 
@@ -37,7 +38,7 @@ public class CarroServlet extends HttpServlet {
             case "editar":
 
                 if (!isAdmin(request)) {
-                    throw new RuntimeException("Acesso negado! Você não tem permissão para acessar isso :/");
+                    throw new AcessoNegadoException("Acesso negado! Você não tem permissão para acessar isso :/");
                 }
 
                 carregarParaEditar(request,response);
@@ -46,7 +47,7 @@ public class CarroServlet extends HttpServlet {
             case "excluir":
 
                 if (!isAdmin(request)) {
-                    throw new RuntimeException("Acesso negado! Você não tem permissão para acessar isso :/");
+                    throw new AcessoNegadoException("Acesso negado! Você não tem permissão para acessar isso :/");
                 }
 
                 excluirCarro(request,response);
@@ -54,10 +55,10 @@ public class CarroServlet extends HttpServlet {
 
             case "listar":
                 if (!isAdmin(request)) {
-                    throw new RuntimeException("Acesso negado! Você não tem permissão para acessar isso :/");
+                    throw new AcessoNegadoException("Acesso negado! Você não tem permissão para acessar isso :/");
                 }
                 request.setAttribute("listaCarros", listaCarros);
-                request.getRequestDispatcher("listaCarros.jsp").forward(request, response);
+                request.getRequestDispatcher("/WEB-INF/listaCarros.jsp").forward(request, response);
                 break;
 
             case "home":
@@ -84,6 +85,16 @@ public class CarroServlet extends HttpServlet {
                 request.getRequestDispatcher("detalharCarro.jsp").forward(request,response);
                 break;
 
+            case "novo":
+
+                if (!isAdmin(request)) {
+                    throw new AcessoNegadoException("Acesso negado!");
+                }
+
+                request.getRequestDispatcher("/WEB-INF/cadastroCarro.jsp")
+                        .forward(request, response);
+                break;
+
             default:
                 request.setAttribute("listaCarros", listaCarros);
                 request.getRequestDispatcher("listaCarros.jsp").forward(request, response);
@@ -101,7 +112,7 @@ public class CarroServlet extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
 
         if (!isAdmin(request)) {
-            throw new RuntimeException("Acesso negado! Você não tem permissão para acessar isso :/");
+            throw new AcessoNegadoException("Acesso negado! Você não tem permissão para acessar isso :/");
         }
 
         String marca = request.getParameter("marca");
@@ -236,12 +247,12 @@ public class CarroServlet extends HttpServlet {
 
         response.sendRedirect("carro");
     }
-        private boolean isAdmin(HttpServletRequest request) {
+
+    private boolean isAdmin(HttpServletRequest request) {
             HttpSession session = request.getSession();
             Usuario logado = (Usuario) session.getAttribute("usuarioLogado");
-
             return (logado != null && "ADMIN".equals(logado.getTipo()));
-        }
+    }
 
     public static Carro buscarPorIdStatic(int id){
         for(Carro c : listaCarros){

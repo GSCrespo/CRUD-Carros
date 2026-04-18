@@ -50,15 +50,15 @@
 
                         <div class="d-flex gap-2 me-3">
                             <c:if test="${usuarioLogado != null && usuarioLogado.tipo == 'ADMIN'}">
-                                <a class="btn btn-success" href="${pageContext.request.contextPath}/cadastroCarro.jsp">
+                                <a class="btn btn-success" href="${pageContext.request.contextPath}/carro?action=novo">
                                     Cadastrar Carro
                                 </a>
 
-                                <a class="btn btn-primary" href="${pageContext.request.contextPath}/cadastroUsuario.jsp">
+                                <a class="btn btn-primary" href="${pageContext.request.contextPath}/usuario?action=novo">
                                     Cadastrar Usuário
                                 </a>
 
-                                <a class="btn btn-warning" href="${pageContext.request.contextPath}/carro">
+                                <a class="btn btn-warning" href="${pageContext.request.contextPath}/carro?action=listar">
                                     Listar Carros
                                 </a>
                             </c:if>

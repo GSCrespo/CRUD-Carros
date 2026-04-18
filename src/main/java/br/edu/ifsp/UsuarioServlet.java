@@ -1,5 +1,6 @@
 package br.edu.ifsp;
 
+import br.edu.ifsp.exception.AcessoNegadoException;
 import br.edu.ifsp.model.Usuario;
 
 import javax.servlet.ServletException;
@@ -26,12 +27,38 @@ public class UsuarioServlet extends HttpServlet {
         HttpSession session = request.getSession();
         Usuario logado = (Usuario) session.getAttribute("usuarioLogado");
 
-        if (logado == null || !"ADMIN".equals(logado.getTipo())) {
-            throw new RuntimeException("Acesso negado! Você não tem permissão para acessar isso :/");
+        String action = request.getParameter("action");
+
+        if (action == null) {
+            action = "listar";
         }
 
-        request.setAttribute("usuarios", listaUsuarios);
-        request.getRequestDispatcher("listaUsuarios.jsp").forward(request, response);
+        switch (action) {
+
+            case "novo":
+
+                if (logado == null || !"ADMIN".equals(logado.getTipo())) {
+                    throw new RuntimeException("Acesso negado!");
+                }
+
+                request.getRequestDispatcher("/WEB-INF/cadastroUsuario.jsp")
+                        .forward(request, response);
+                break;
+
+            case "listar":
+
+                if (logado == null || !"ADMIN".equals(logado.getTipo())) {
+                    throw new RuntimeException("Acesso negado!");
+                }
+
+                request.setAttribute("usuarios", listaUsuarios);
+                request.getRequestDispatcher("/WEB-INF/listaUsuarios.jsp")
+                        .forward(request, response);
+                break;
+
+            default:
+                response.sendRedirect("index.jsp");
+        }
     }
 
     //  CADASTRAR USUÁRIO
@@ -43,7 +70,7 @@ public class UsuarioServlet extends HttpServlet {
         Usuario logado = (Usuario) session.getAttribute("usuarioLogado");
 
         if (logado != null && !"ADMIN".equals(logado.getTipo())) {
-            throw new RuntimeException("Acesso negado! Você não tem permissão para acessar isso :/");
+            throw new AcessoNegadoException("Acesso negado! Você não tem permissão para acessar isso :/");
         }
 
         String userName = request.getParameter("username");
@@ -81,7 +108,7 @@ public class UsuarioServlet extends HttpServlet {
         //  Se tiver erro
         if (!erros.isEmpty()) {
             request.setAttribute("erros", erros);
-            request.getRequestDispatcher("cadastroUsuario.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/cadastroUsuario.jsp").forward(request, response);
             return;
         }
 
@@ -92,7 +119,7 @@ public class UsuarioServlet extends HttpServlet {
 
         if(logado != null && !"COMUM".equals(logado.getTipo())) { /*caso seja admin que cadastrou um usuario ele volta para o index,
                                                                  caso seja o proprio usuario a se cadastrar ele vai para p login direto */
-            response.sendRedirect("index.jsp");
+            response.sendRedirect("carro?action=home");
         } else{
             response.sendRedirect("login.jsp");
         }
