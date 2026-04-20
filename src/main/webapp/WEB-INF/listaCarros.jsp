@@ -67,7 +67,8 @@
                              <td>${carro.descricao}</td>
                              <c:if test="${usuarioLogado != null && usuarioLogado.tipo == 'ADMIN'}"> <!--Somente ADMIN pode Editar e Excluir-->
                              <td><a class="btn btn-warning"href="carro?action=editar&id=${carro.getId()}">Editar</a></td>
-                             <td><a class="btn btn-danger"href="carro?action=excluir&id=${carro.getId()}">Excluir</a></td>
+                             <td><a class="btn btn-danger"href="carro?action=excluir&id=${carro.getId()}"
+                             onclick="return confirm('Tem certeza que deseja excluir esse carro?');">Excluir</a></td>
                              </c:if>
                          </tr>
                      </c:forEach>

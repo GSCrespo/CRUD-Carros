@@ -38,7 +38,7 @@ public class UsuarioServlet extends HttpServlet {
             case "novo":
 
                 if (logado == null || !"ADMIN".equals(logado.getTipo())) {
-                    throw new RuntimeException("Acesso negado!");
+                    throw new AcessoNegadoException("Acesso negado!");
                 }
 
                 request.getRequestDispatcher("/WEB-INF/cadastroUsuario.jsp")
@@ -48,7 +48,7 @@ public class UsuarioServlet extends HttpServlet {
             case "listar":
 
                 if (logado == null || !"ADMIN".equals(logado.getTipo())) {
-                    throw new RuntimeException("Acesso negado!");
+                    throw new AcessoNegadoException("Acesso negado!");
                 }
 
                 request.setAttribute("usuarios", listaUsuarios);
