@@ -65,8 +65,10 @@
                         </div>
 
 
-                        <form class="d-flex" role="search">
+                        <form class="d-flex" method="get" action="${pageContext.request.contextPath}/carro">
+                            <input type="hidden" name="action" value="buscar">
                             <input class="form-control me-2" type="search" placeholder="Buscar carro..." name="termoBusca">
+
                             <button class="btn btn-outline-light" type="submit">Buscar</button>
                         </form>
 

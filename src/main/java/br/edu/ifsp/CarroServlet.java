@@ -28,10 +28,9 @@ public class CarroServlet extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         String action = request.getParameter("action");
 
-        System.out.println("entrou no doGet");
 
         if(action == null){
-            action = "listar";
+            action = "home";
         }
         switch (action){
 
@@ -67,7 +66,6 @@ public class CarroServlet extends HttpServlet {
                             .sorted(Comparator.comparing(Carro::getValor).reversed())
                             .limit(5)
                             .collect(Collectors.toList());
-                    System.out.println("entrou aq");
                     System.out.println(listaLancamento.size());
                 }
                 request.setAttribute("listaCarros", listaCarros);
@@ -93,6 +91,22 @@ public class CarroServlet extends HttpServlet {
 
                 request.getRequestDispatcher("/WEB-INF/cadastroCarro.jsp")
                         .forward(request, response);
+                break;
+
+            case "buscar":
+                String termo = request.getParameter("termoBusca");
+                if(termo == null || termo.trim().isEmpty()){
+                    response.sendRedirect("carro?action=home");
+                    return;
+                }
+                List<Carro> Resultados = listaCarros.stream()
+                        .filter(c ->
+                            c.getMarca().toLowerCase().contains(termo.toLowerCase())  ||
+                            c.getModelo().toLowerCase().contains(termo.toLowerCase())
+                        ).collect(Collectors.toList());
+                request.setAttribute("resultados",Resultados);
+                request.setAttribute("termoBusca",termo);
+                request.getRequestDispatcher("/resultadosCarros.jsp").forward(request,response);
                 break;
 
             default:
