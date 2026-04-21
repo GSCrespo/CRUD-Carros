@@ -79,7 +79,7 @@
 
                     <div class="col-md-12 mb-3">
                         <label class="form-label">Descrição</label>
-                        <textarea name="descricao" class="form-control" rows="3">${carro.descricao}</textarea>
+                        <textarea name="descricao" class="form-control" maxlength="80" rows="3">${carro.descricao}</textarea>
                     </div>
 
                     <div class="col-md-16 mb-4">
@@ -88,10 +88,13 @@
                     </div>
 
                 </div>
-
+                <div class="d-flex gap-3 mt-4">
                 <button type="submit" class="btn btn-success w-100 mt-3">
                     Salvar
                 </button>
+                    <a href="${pageContext.request.contextPath}/carro?action=home" class="btn btn-danger w-100 mt-3"
+                    >Cancelar</a>
+                </div>
 
             </form>
 
@@ -100,6 +103,49 @@
 
 </div>
 
+
+<script>
+    let alterado = false;
+
+    window.addEventListener("DOMContentLoaded", function () {
+
+        const form = document.querySelector(".card-body form");
+
+        if (!form) return;
+
+        // qualquer alteração é detectada
+        form.addEventListener("input", function () {
+            alterado = true;
+            console.log("Alterado!");
+        });
+
+        form.addEventListener("change", function () {
+            alterado = true;
+        });
+
+        // Quando enviar o form não tem aviso
+        form.addEventListener("submit", function () {
+            alterado = false;
+        });
+
+    });
+
+    // aviso ao sair da página
+    window.addEventListener("beforeunload", function (e) {
+        if (alterado) {
+            e.preventDefault();
+            e.returnValue = "";
+        }
+    });
+
+    // Botão cancelar
+    function confirmarSaida() {
+        if (alterado) {
+            return confirm("Tem certeza que deseja sair? Alterações serão perdidas.");
+        }
+        return true;
+    }
+</script>
 
 
 <c:import url="/includes/footer.jsp" />

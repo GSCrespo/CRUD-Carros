@@ -54,7 +54,7 @@
                                     Cadastrar Carro
                                 </a>
 
-                                <a class="btn btn-primary" href="${pageContext.request.contextPath}/usuario?action=novo">
+                                <a class="btn btn-primary" href="${pageContext.request.contextPath}/cadastroUsuario.jsp">
                                     Cadastrar Usuário
                                 </a>
 

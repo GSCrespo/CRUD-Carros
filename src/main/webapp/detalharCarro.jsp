@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:import url="/includes/header.jsp" />
 
@@ -18,7 +19,7 @@
                     </h2>
 
                     <h4 class="text-success mb-4">
-                        R$ ${carro.valor}
+                        <fmt:formatNumber value="${carro.valor}" type="currency"/>
                     </h4>
 
                     <div class="row mb-3">
@@ -29,11 +30,11 @@
 
                         <div class="col-md-6">
                             <p><strong>Combustível:</strong> ${carro.combustivel}</p>
-                            <p><strong>Km:</strong> ${carro.quilometragem}</p>
+                            <p><strong>Km: </strong><fmt:formatNumber value="${carro.quilometragem}" type="number"/></p>
                         </div>
 
                         <div class="col-md-6">
-                            <p><strong>Avaliação:</strong> ${carro.getMediaAvaliacao()}</p>
+                            <p><strong>Avaliação: <fmt:formatNumber value="${carro.mediaAvaliacao}" maxFractionDigits="1"/> </p>
                         </div>
                     </div>
 
@@ -55,6 +56,12 @@
                                class="btn btn-warning">
                                 Editar
                             </a>
+                        </c:if>
+
+                        <c:if test="${usuarioLogado != null}">
+                        <a class="btn btn-success" href="avaliacao.jsp?id=${carro.id}">
+                            Avaliar
+                        </a>
                         </c:if>
 
                     </div>

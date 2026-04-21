@@ -36,12 +36,11 @@
                 <p class="form-control">${usuarioLogado.tipo}</p>
             </div>
 
-            <!-- Botões (você coloca os links depois) -->
+            <!-- Botões -->
             <div class="d-flex justify-content-between mt-4">
-                <a href="#" class="btn btn-warning">Editar Perfil</a>
                 <a href="${pageContext.request.contextPath}/carro?action=home" class="btn btn-secondary">Voltar</a>
 
-                    <a class="nav-link" href="${pageContext.request.contextPath}/Sair">
+                    <a class="btn btn-danger" href="${pageContext.request.contextPath}/Sair" onclick="return confirm('tem certeza que deseja ser desconectado da conta?')" >
                         Sair
                     </a>
             </div>

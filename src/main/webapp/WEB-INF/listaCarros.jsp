@@ -31,11 +31,6 @@
                          <th>Transmissão</th>
                          <th>Valor</th>
                          <th>Avaliação</th>
-
-                         <c:if test="${usuarioLogado != null}">
-                         <th>Avaliar</th>
-                         </c:if>
-
                          <th>Descrição</th>
                          <c:if test="${usuarioLogado != null && usuarioLogado.tipo == 'ADMIN'}">
                          <th>Editar</th>
@@ -58,11 +53,6 @@
                              <td><fmt:formatNumber value="${carro.valor}" type="currency"/> </td>
                              <td><fmt:formatNumber value="${carro.mediaAvaliacao}" maxFractionDigits="1"/></td>
 
-                             <c:if test="${usuarioLogado != null}">
-                             <td><a class="btn btn-secondary" href="avaliacao.jsp?id=${carro.id}">
-                                 Avaliar
-                             </a></td>
-                            </c:if> <!--Somente quem tem cadastro pode avaliar-->
 
                              <td>${carro.descricao}</td>
                              <c:if test="${usuarioLogado != null && usuarioLogado.tipo == 'ADMIN'}"> <!--Somente ADMIN pode Editar e Excluir-->

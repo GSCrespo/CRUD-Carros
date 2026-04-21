@@ -240,7 +240,7 @@ public class CarroServlet extends HttpServlet {
 
         request.setAttribute("carro",carro);
         request.setAttribute("modo", "editar");
-        request.getRequestDispatcher("cadastroCarro.jsp").forward(request,response);
+        request.getRequestDispatcher("/WEB-INF/cadastroCarro.jsp").forward(request,response);
 
     }
 

@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:import url="/includes/header.jsp" />
 
@@ -26,8 +27,8 @@
                                     Ano: ${carro.ano} <br>
                                     Cor: ${carro.cor} <br>
                                     Combustível: ${carro.combustivel} <br>
-                                    Valor: R$ ${carro.valor}<br>
-                                    Avaliação: ${carro.mediaAvaliacao}
+                                    Valor: <fmt:formatNumber value="${carro.valor}" type="currency"/><br>
+                                    Avaliação: <fmt:formatNumber value="${carro.mediaAvaliacao}" maxFractionDigits="1"/>
                                 </p>
                                 <a href="${pageContext.request.contextPath}/carro?action=detalhes&id=${carro.id}"
                                        class="btn btn-primary">
@@ -76,8 +77,8 @@
                          <p class="card-text">
                              <strong>Ano:</strong> ${carro.ano} <br>
                              <strong>Cor:</strong> ${carro.cor} <br>
-                             <strong>Valor:</strong> R$ ${carro.valor}<br>
-                             <strong>Avaliação:</strong> ${carro.mediaAvaliacao}
+                             <strong>Valor:</strong> <fmt:formatNumber value="${carro.valor}" type="currency"/><br>
+                             <strong>Avaliação:</strong> <fmt:formatNumber value="${carro.mediaAvaliacao}" maxFractionDigits="1"/>
                          </p>
                      </div>
 
