@@ -24,22 +24,22 @@ public class CarroServlet extends HttpServlet {
     static {
         listaCarros.add(new Carro(
                 "Volkswagen", "Fusca", 1980,
-                "Clássico raiz, econômico e cheio de história",
-                "Azul", "Gasolina", 120000,
+                "Tanque de guerra raiz",
+                "Vermelho", "Gasolina", 120000,
                 "Manual", 11000, "fusca.jpg"
         ));
 
         listaCarros.add(new Carro(
                 "Volkswagen", "Kombi", 1995,
-                "Perfeita pra viagem, food truck ou role com a galera",
-                "Branca", "Gasolina", 200000,
-                "Manual", 19000, "kombi.jpg"
+                "Com folga no volante",
+                "Verde Samambaia", "Gasolina", 200000,
+                "Manual", 19000, "kombi.png"
         ));
 
         listaCarros.add(new Carro(
                 "Chevrolet", "Celta", 2012,
                 "Barato, confiável e econômico pra cidade",
-                "Prata", "Flex", 90000,
+                "Branco", "Flex", 90000,
                 "Manual", 25000, "celta.jpg"
         ));
     }
