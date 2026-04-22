@@ -47,7 +47,7 @@
 
                         <c:if test="${usuarioLogado != null && usuarioLogado.tipo == 'ADMIN'}">
                             <a href="carro?action=excluir&id=${carro.id}"
-                            class="btn btn-danger btn-sm">
+                            class="btn btn-danger btn-sm" onclick="return confirm('Certeza que deseja excluir esse item?')" >
                                 Excluir
                             </a>
                         </c:if>
