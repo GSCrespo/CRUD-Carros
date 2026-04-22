@@ -27,8 +27,27 @@
                                     Ano: ${carro.ano} <br>
                                     Cor: ${carro.cor} <br>
                                     Combustível: ${carro.combustivel} <br>
-                                    Valor: <fmt:formatNumber value="${carro.valor}" type="currency"/><br>
-                                    Avaliação: <fmt:formatNumber value="${carro.mediaAvaliacao}" maxFractionDigits="1"/>
+                                    <c:choose>
+                                            <c:when test="${carro.emPromocao}">
+
+                                                <span class="badge bg-danger">Promoção</span><br>
+
+                                                <span style="text-decoration: line-through; color: gray;">
+                                                    <fmt:formatNumber value="${carro.valor}" type="currency"/>
+                                                </span><br>
+
+                                                <strong class="text-success">
+                                                    <fmt:formatNumber value="${carro.valorPromocional}" type="currency"/>
+                                                </strong>
+
+                                            </c:when>
+
+                                            <c:otherwise>
+                                                Valor: <fmt:formatNumber value="${carro.valor}" type="currency"/>
+                                            </c:otherwise>
+                                        </c:choose>
+                                        <br>
+                                            Avaliação: <fmt:formatNumber value="${carro.mediaAvaliacao}" maxFractionDigits="1"/>
                                 </p>
                                 <a href="${pageContext.request.contextPath}/carro?action=detalhes&id=${carro.id}"
                                        class="btn btn-primary">
@@ -77,7 +96,30 @@
                          <p class="card-text">
                              <strong>Ano:</strong> ${carro.ano} <br>
                              <strong>Cor:</strong> ${carro.cor} <br>
-                             <strong>Valor:</strong> <fmt:formatNumber value="${carro.valor}" type="currency"/><br>
+                             <strong>Valor:</strong>
+                             <c:choose>
+                                 <c:when test="${carro.emPromocao}">
+
+                                     <div>
+                                         <span style="text-decoration: line-through; color: gray;">
+                                             <fmt:formatNumber value="${carro.valor}" type="currency"/>
+                                         </span>
+                                     </div>
+
+                                     <div>
+                                         <strong class="text-success">
+                                             <fmt:formatNumber value="${carro.valorPromocional}" type="currency"/>
+                                         </strong>
+                                     </div>
+
+                                     <span class="badge bg-danger">Promoção</span>
+
+                                 </c:when>
+
+                                 <c:otherwise>
+                                     <fmt:formatNumber value="${carro.valor}" type="currency"/>
+                                 </c:otherwise>
+                             </c:choose>
                              <strong>Avaliação:</strong> <fmt:formatNumber value="${carro.mediaAvaliacao}" maxFractionDigits="1"/>
                          </p>
                      </div>
@@ -93,6 +135,28 @@
                                 class="btn btn-warning btn-sm">
                                  Editar
                              </a>
+                         </c:if>
+
+                         <c:if test="${usuarioLogado != null && usuarioLogado.tipo == 'ADMIN'}">
+
+                             <c:choose>
+
+                                 <c:when test="${carro.emPromocao}">
+                                     <a href="carro?action=removerPromocao&id=${carro.id}"
+                                        class="btn btn-secondary btn-sm">
+                                         Remover Promoção
+                                     </a>
+                                 </c:when>
+
+                                 <c:otherwise>
+                                     <a href="carro?action=promocao&id=${carro.id}"
+                                        class="btn btn-danger btn-sm">
+                                         Promoção
+                                     </a>
+                                 </c:otherwise>
+
+                             </c:choose>
+
                          </c:if>
 
                      </div>

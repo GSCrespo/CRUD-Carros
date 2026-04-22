@@ -7,7 +7,7 @@
 <div class="container flex-grow-1 mt-5 text-center">
 
     <div class="card shadow-lg p-4">
-            <h1 class="text-danger mb-3">🚫 Acesso Negado</h1>
+            <h1 class="text-danger mb-3">Acesso Negado</h1>
 
             <p class="mb-4">
                 Você não tem permissão para acessar esta página.

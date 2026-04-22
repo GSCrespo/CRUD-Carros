@@ -27,7 +27,27 @@
                         <p>
                             <strong>Ano:</strong> ${carro.ano} <br>
                             <strong>Cor:</strong> ${carro.cor} <br>
-                            <strong>Valor:</strong> <fmt:formatNumber value="${carro.valor}" type="currency"/>
+                            <c:choose>
+                                <c:when test="${carro.emPromocao}">
+
+                                    <span class="badge bg-danger">Promoção</span><br>
+
+                                    <span style="text-decoration: line-through; color: gray;">
+                                        <fmt:formatNumber value="${carro.valor}" type="currency"/>
+                                    </span><br>
+
+                                    <strong class="text-success">
+                                        <fmt:formatNumber value="${carro.valorPromocional}" type="currency"/>
+                                    </strong>
+
+                                </c:when>
+
+                                <c:otherwise>
+                                    <strong>
+                                        <fmt:formatNumber value="${carro.valor}" type="currency"/>
+                                    </strong>
+                                </c:otherwise>
+                            </c:choose>
                         </p>
                     </div>
 
@@ -50,6 +70,29 @@
                             class="btn btn-danger btn-sm" onclick="return confirm('Certeza que deseja excluir esse item?')" >
                                 Excluir
                             </a>
+                        </c:if>
+
+
+                        <c:if test="${usuarioLogado != null && usuarioLogado.tipo == 'ADMIN'}">
+
+                            <c:choose>
+
+                                <c:when test="${carro.emPromocao}">
+                                    <a href="carro?action=removerPromocao&id=${carro.id}"
+                                       class="btn btn-secondary btn-sm">
+                                        Remover Promoção
+                                    </a>
+                                </c:when>
+
+                                <c:otherwise>
+                                    <a href="carro?action=promocao&id=${carro.id}"
+                                       class="btn btn-danger btn-sm">
+                                        Promoção
+                                    </a>
+                                </c:otherwise>
+
+                            </c:choose>
+
                         </c:if>
 
 

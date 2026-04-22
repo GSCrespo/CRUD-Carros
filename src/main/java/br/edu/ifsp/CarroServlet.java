@@ -132,6 +132,46 @@ public class CarroServlet extends HttpServlet {
                 request.getRequestDispatcher("/resultadosCarros.jsp").forward(request,response);
                 break;
 
+            case "promocao":
+
+                if (!isAdmin(request)) {
+                    throw new AcessoNegadoException("Acesso negado");
+                }
+
+                int idPromo = Integer.parseInt(request.getParameter("id"));
+
+                Carro carroPromo = buscarPorId(idPromo);
+
+                if (carroPromo == null) {
+                    throw new AcessoNegadoException("Carro não encontrado ou inválido.");
+                }
+
+                // DESCONTO FIXO (ex: 20%)
+                double desconto = 0.20;
+
+                double novoValor = carroPromo.getValor() * (1 - desconto);
+
+                carroPromo.setEmPromocao(true);
+                carroPromo.setValorPromocional(novoValor);
+
+
+                response.sendRedirect("carro?action=home");
+                break;
+
+            case "removerPromocao":
+
+                int idRemover = Integer.parseInt(request.getParameter("id"));
+
+                Carro c = buscarPorId(idRemover);
+
+                if (c != null) {
+                    c.setEmPromocao(false);
+                    c.setValorPromocional(0);
+                }
+
+                response.sendRedirect("carro?action=home");
+                break;
+
             default:
                 request.setAttribute("listaCarros", listaCarros);
                 request.getRequestDispatcher("listaCarros.jsp").forward(request, response);

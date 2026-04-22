@@ -16,11 +16,15 @@ public class Carro {
     private int totalAvaliacao;
     private double somaAvaliacao;
     private String imagem;
+    private boolean emPromocao;
+    private double valorPromocional;
 
     //construtor vazio
 
     public Carro() {
         this.id = id_atual++;
+        this.emPromocao = false;
+        this.valorPromocional = 0.0;
     }
 
     //construtor completo
@@ -100,6 +104,14 @@ public class Carro {
         return imagem;
     }
 
+    public boolean isEmPromocao() {
+        return emPromocao;
+    }
+
+    public double getValorPromocional() {
+        return valorPromocional;
+    }
+
     //setters
 
     public void setMarca(String marca) {
@@ -148,6 +160,14 @@ public class Carro {
 
     public void setImagem(String imagem) {
         this.imagem = imagem;
+    }
+
+    public void setEmPromocao(boolean emPromocao) {
+        this.emPromocao = emPromocao;
+    }
+
+    public void setValorPromocional(double valorPromocional) {
+        this.valorPromocional = valorPromocional;
     }
 }
 
