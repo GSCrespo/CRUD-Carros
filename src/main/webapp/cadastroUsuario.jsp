@@ -13,20 +13,20 @@
 
         <form action="${pageContext.request.contextPath}/usuario" method="post">
 
-            <!-- Username -->
+
             <div class="mb-3">
                 <label class="form-label">Nome de Usuário</label>
                 <input type="text" class="form-control"
                        name="username" value="${usuario.username}" placeholder="Seu Username" required>
             </div>
 
-            <!-- Senha -->
+
             <div class="mb-3">
                 <label class="form-label">Senha</label>
                 <input type="password" class="form-control" name="senha" placeholder="Sua Senha" required>
             </div>
 
-            <!-- Tipo -->
+
             <div class="mb-3">
                 <label class="form-label">Tipo de Usuário</label>
                 <select name="tipo" class="form-control" required>

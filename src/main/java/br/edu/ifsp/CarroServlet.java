@@ -172,11 +172,6 @@ public class CarroServlet extends HttpServlet {
                 response.sendRedirect("carro?action=home");
                 break;
 
-            default:
-                request.setAttribute("listaCarros", listaCarros);
-                request.getRequestDispatcher("listaCarros.jsp").forward(request, response);
-                break;
-                // verificar fluxo do default dps, ajustar
         }
 
     }
@@ -274,8 +269,6 @@ public class CarroServlet extends HttpServlet {
                         combustivel, quilometragem, transmissao, valor, nomeFinal );
 
                 listaCarros.add(carro);
-                //request.setAttribute("listaCarros", listaCarros);
-                //request.getRequestDispatcher("listaCarros.jsp").forward(request, response);
             }
             response.sendRedirect("carro");
         }

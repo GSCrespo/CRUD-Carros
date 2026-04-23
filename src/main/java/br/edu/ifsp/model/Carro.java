@@ -19,7 +19,7 @@ public class Carro {
     private boolean emPromocao;
     private double valorPromocional;
 
-    //construtor vazio
+    //construtor parcial
 
     public Carro() {
         this.id = id_atual++;
